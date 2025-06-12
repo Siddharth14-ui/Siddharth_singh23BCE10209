@@ -1,0 +1,27 @@
+package connection;
+
+import org.bson.Document;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.FindIterable;
+import org.bson.conversions.Bson;
+import static com.mongodb.client.model.Sorts.descending;
+
+public class Sorting {
+    public static void main(String[] args) {
+        MongoClient mongoClient = MongoClients.create("mongodb://localhost:27017");
+        MongoDatabase database = mongoClient.getDatabase("myDb");
+        MongoCollection<Document> collection = database.getCollection("sampleCollection");
+        Bson sort = descending("First_Name");
+        FindIterable<Document> documents = collection.find().sort(sort);
+        for (Document document : documents) {
+            System.out.println(document);
+        }
+        mongoClient.close();
+    }
+}
+
+        
+
