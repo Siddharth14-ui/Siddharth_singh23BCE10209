@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="stylessheets/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+    <div class="w-full h-full bg-zinc-900 p-10 text-white">
+        <h1>All Users</h1>
+        <div>
+            <a href="/">Back to home</a>
+        </div>
+        <div class="users flex gap-3 flex-wrap mt-8">
+            <% allusers.forEach((user) => { %>
+                <div class="user w-72 p-4 bg-zinc-800 rounded-lg flex flex-col items-center">
+                    <% if(user.image) { %>
+                        <img src="<%= user.image %>" alt="User Image" class="w-full h-52 object-cover rounded-lg bg-red-500" />
+                    <% } else { %>
+                        <div class="w-full h-52 rounded-lg bg-red-500 flex items-center justify-center text-2xl">No Image</div>
+                    <% } %>
+                    <h3 class="text-xl tracking-tighter mt-3"><%= user.name %></h3>
+                    <h5 class="text-zinc-500"><%= user.email %></h5>
+                    <div class="flex gap-3 mt-10">
+                        <a href="/update/<%= user._id %>" class="px-4 py-2 rounded-lg bg-green-300 text-black">Update</a>
+                        <a href="/delete/<%= user._id %>" class="px-4 py-2 rounded-lg bg-red-300 text-black">Delete</a>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</body>
+</html>
